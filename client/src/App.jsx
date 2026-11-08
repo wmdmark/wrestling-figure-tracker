@@ -69,6 +69,7 @@ export default function App() {
   const [trackError, setTrackError] = useState('')
   const [tracking, setTracking] = useState(false)
   const [listError, setListError] = useState('')
+  const [showCollection, setShowCollection] = useState(false)
 
   useEffect(() => {
     loadTracked()
@@ -167,9 +168,28 @@ export default function App() {
   return (
     <main className="page">
       <header className="header">
-        <h1>Wrestling Figure Tracker</h1>
-        <p>Search current eBay listings, then save a search to watch its prices.</p>
+        <div>
+          <h1>Wrestling Figure Tracker</h1>
+          <p>Search current eBay listings, then save a search to watch its prices.</p>
+        </div>
+        <div className="header-actions">
+          <button type="button">Add Figure</button>
+          <button
+            type="button"
+            className={showCollection ? 'secondary selected' : 'secondary'}
+            onClick={() => setShowCollection((open) => !open)}
+          >
+            Collection
+          </button>
+        </div>
       </header>
+
+      {showCollection && (
+        <section className="panel">
+          <h2>Collection</h2>
+          <p className="empty">Pictures you save will be kept with your account.</p>
+        </section>
+      )}
 
       <section className="panel">
         <h2>Search</h2>
